@@ -1,28 +1,19 @@
-import { useSelector, useDispatch } from 'react-redux';
+import Counter from './features/counter/Counter';
+import TodoList from './features/todo/TodoList';
+import ThemeToggle from './features/theme/ThemeToggle';
+import { useSelector } from 'react-redux';
 
-function App() {
-  const count = useSelector((state) => state.count);
-  const dispatch = useDispatch();
+export default function App() {
+  const theme = useSelector(state => state.theme);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <h1 className="text-4xl font-bold mb-6">Count: {count}</h1>
-      <div className="space-x-4">
-        <button
-          onClick={() => dispatch({ type: 'DECREMENT' })}
-          className="px-4 py-2 bg-red-500 text-white rounded hover:bg-blue-600 transition"
-        >
-          -
-        </button>
-        <button
-          onClick={() => dispatch({ type: 'INCREMENT' })}
-          className="px-4 py-2 bg-green-500 text-white rounded hover:bg-pink-600 transition"
-        >
-          +
-        </button>
+    <div className={`min-h-screen p-8 ${theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'}`}>
+      <div className="max-w-xl mx-auto space-y-10">
+        <h1 className="text-3xl font-bold text-center">🛠 React Redux Vite + Tailwind</h1>
+        <ThemeToggle />
+        <Counter />
+        <TodoList />
       </div>
     </div>
   );
 }
-
-export default App;
